@@ -30,5 +30,5 @@ export class Cart {
   createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAat: Date;
+  updatedAt: Date;
 }
