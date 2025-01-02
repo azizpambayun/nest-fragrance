@@ -27,6 +27,10 @@ export class CartsService {
       where: { user: { id: userId } },
       relations: ['items', 'items.perfume'],
     });
+
+    if (!cart) {
+      throw new NotFoundException(`Cart for user with ID ${userId} not found}`);
+    }
     return cart;
   }
 
@@ -82,6 +86,7 @@ export class CartsService {
       throw new NotFoundException(`Cart with ID ${cartId} not found`);
     }
 
+    await this.cartItemRepository.delete({ cart: { id: cartId } });
     await this.cartRepository.remove(cart);
   }
 }

@@ -22,11 +22,11 @@ export class CartsController {
   constructor(private readonly cartsService: CartsService) {}
 
   @Get(':userId')
-  findCartByUser(@Param('id', ParseIntPipe) userId: number) {
+  findCartByUser(@Param('userId', ParseIntPipe) userId: number) {
     return this.cartsService.findCartByUser(userId);
   }
 
-  @Post('create/:userId')
+  @Post('cart/:userId')
   createCartForUser(@Param('userId', ParseIntPipe) userId: number) {
     const user = new (Perfume as any)();
     user.id = userId;
