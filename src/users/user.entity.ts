@@ -2,12 +2,14 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  OneToOne,
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Cart } from 'src/carts/cart.entity';
 
 @Entity()
 export class User {
@@ -22,6 +24,9 @@ export class User {
 
   @Column({ default: 'user' })
   role: string;
+
+  @OneToOne(() => Cart, (cart) => cart.user)
+  cart: Cart;
 
   @CreateDateColumn()
   createdAt: Date;
