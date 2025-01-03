@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
@@ -10,6 +11,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Cart } from 'src/carts/cart.entity';
+import { Order } from 'src/orders/order.entity';
 
 @Entity()
 export class User {
@@ -27,6 +29,9 @@ export class User {
 
   @OneToOne(() => Cart, (cart) => cart.user)
   cart: Cart;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 
   @CreateDateColumn()
   createdAt: Date;
